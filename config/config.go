@@ -1,19 +1,11 @@
-// config/config.go
-
 package config
 
-type Config struct {
-	Server    ServerConfig
-	Database  DatabaseConfig
-	LangChain LangChainConfig
-}
-
-type ServerConfig struct {
+type Server struct {
 	Port string
 	Host string
 }
 
-type DatabaseConfig struct {
+type Database struct {
 	Port     string
 	Host     string
 	User     string
@@ -21,11 +13,11 @@ type DatabaseConfig struct {
 	DBName   string
 }
 
-type LangChainConfig struct {
+type LangChain struct {
 	APIKey  string
 	BaseURL string
 }
 
-func LoadConfig() (*Config, error) {
-
-}
+// func LoadConfig() (*Config, error) {
+// 	return nil, nil
+// }

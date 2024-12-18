@@ -1,0 +1,5 @@
+host: "localhost"
+port: "3399"
+user: "sarim"
+password: "1234"
+dbname: "vectors"
