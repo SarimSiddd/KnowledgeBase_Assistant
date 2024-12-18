@@ -1,0 +1,22 @@
+services:
+  postgres:
+    build: .
+    container_name: knowledge_base_db
+    ports:
+      - "3399:3399"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: sarim
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: vectors
+    networks:
+      - knowledge_base_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  knowledge_base_network:
+    driver: bridge
