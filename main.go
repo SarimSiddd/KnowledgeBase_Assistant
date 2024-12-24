@@ -4,16 +4,14 @@ import (
 	"context"
 	"fmt"
 	"knowledge-base-assistant/config"
+	"log"
 	"os"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/tmc/langchaingo/llms"
+	"github.com/tmc/langchaingo/llms/anthropic"
 	"gopkg.in/yaml.v3"
 )
-
-type T struct {
-	A int
-	B int
-}
 
 func main() {
 
@@ -33,6 +31,7 @@ func main() {
 
 	if err != nil {
 		fmt.Println("Error connection to database", err)
+		panic(err)
 	}
 
 	defer conn.Close(context.Background())
@@ -45,4 +44,19 @@ func main() {
 	}
 
 	fmt.Println("Printing row result: ", res)
+
+	llm, err := anthropic.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	prompt := "What is the capital of France?"
+	completion, err := llms.GenerateFromSinglePrompt(context.Background(), llm, prompt)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(completion)
+
 }
