@@ -13,8 +13,25 @@ services:
     networks:
       - knowledge_base_network
 
+  chroma:
+    build:
+      context: .
+      dockerfile: Dockerfile.chroma
+    container_name: knowledge_base_chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/app/chroma_data
+    environment:
+      CHROMA_SERVER_HOST: "0.0.0.0"
+      CHROMA_SERVER_HTTP_PORT: "8000"
+    networks:
+      - knowledge_base_network
+
 volumes:
   postgres_data:
+    driver: local
+  chroma_data:
     driver: local
 
 networks:
